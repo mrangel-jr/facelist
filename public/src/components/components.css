@@ -2,9 +2,10 @@
 
 /* Card Ads */
 #cardad-container {
-    display: 'flex';
-    flex-Direction:'row';
-    justify-Content: 'center';
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+
 }
 
 #ad-img {
@@ -15,11 +16,17 @@
 /* Card Face */
 #cardface-container {
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center
 }
 
 #face-container {
     justify-self: center;
+    align-self: center;
+}
+
+#content-container {
+    justify-self: flex-start;
     align-self: center;
 }
 
@@ -36,3 +43,12 @@
 
 
 /* ListView */
+
+#listview-container {
+    display: grid;
+}
+
+#filter-container {
+    justify-self: self-end;
+    margin-right: 50px;
+}

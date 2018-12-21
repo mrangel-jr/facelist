@@ -9,26 +9,32 @@ class ListView extends Component {
             currentOrder: 'price'
         };
         this.maxPerPage = 20;
-        this.changeOrder = this.changeOrder.bind();
+        this.changeOrder = this.changeOrder.bind(this);
     }
 
     changeOrder(e) {
-        // console.log(e.target.value)
-        this.setState({currentOrder:`'${e.target.value}'`});
+        this.setState({currentOrder:e.target.value});
+    }
+
+    renderFilter(currentOrder) {
+        return (
+            <div id="filter-container">
+                Order:
+                <select onChange={this.changeOrder} value={currentOrder}> 
+                    <option value="price" defaultValue>Price</option>
+                    <option value="size">Size</option>
+                    <option value="id">Id</option>
+                </select>
+            </div>
+        )
     }
 
 
     render() {
         const {currentOrder} = this.state;
         return (
-            <div>
-                <div>Order:
-                    <select onChange={this.changeOrder} value={currentOrder}> 
-                        <option value="price" defaultValue>Price</option>
-                        <option value="size">Size</option>
-                        <option value="id">Id</option>
-                    </select>
-                </div>
+            <div id="listview-container">
+                {this.renderFilter(currentOrder)}
                 <InfiniteScroll order={currentOrder} moreUsers={this.maxPerPage}/>
             </div>
         );

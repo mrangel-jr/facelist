@@ -20,7 +20,6 @@ class InfiniteScroll extends Component {
     // Binds our scroll event handler
     window.onscroll = () => {
       const {
-        loadUsers,
         state: {
           error,
           isLoading,
@@ -44,9 +43,21 @@ class InfiniteScroll extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // Loads some items on initial load
     this.loadContents();
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.order!==this.props.order){
+      //Perform some operation
+      this.setState({ 
+          page: 1,
+          items: [] 
+        }, () => {
+        this.loadContents();
+      });
+    }
   }
 
   loadContents() {
@@ -60,7 +71,6 @@ class InfiniteScroll extends Component {
       }
       return random;
     })(lastAd);
-
     this.setState({ isLoading: true }, () => {
       axios.all([
         axios.get(`http://localhost:3000/api/products/?_page=${page}&_limit=${moreUsers}&_sort=${order}`),
@@ -80,7 +90,6 @@ class InfiniteScroll extends Component {
             key: number,
             ad: ads.request.responseURL,
           });
-          console.log(ad);
           this.setState({
             // Note: Depending on the API you're using, this value may be
             // returned as part of the payload to indicate that there is no
@@ -109,7 +118,7 @@ class InfiniteScroll extends Component {
     } = this.state;
 
     return (
-      <div>
+      <div id="infinitescroll-container">
         {items.map(item => (
           item.ad ?
           <CardAd item={item}/> : <CardFace item={item}/>

@@ -3,7 +3,7 @@ import "./components.css";
 
 class CardAd extends Component {
     constructor() {
-        super()
+        super();
     }
 
     render() {

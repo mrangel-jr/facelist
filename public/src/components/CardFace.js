@@ -2,9 +2,9 @@ import React, { Component, Fragment } from "react";
 import "./components.css";
 
 class CardFace extends Component {
-    // constructor() {
-    //     super()
-    // }
+    constructor(props) {
+        super(props);
+    }
 
     formatMoney(cents) {
         return "$"+String(cents/100);
@@ -24,15 +24,24 @@ class CardFace extends Component {
         }
         return newDay.toLocaleDateString();
     }
+
+    componentWillReceiveProps(nextProps){
+        console.log('Props',this.props);
+        console.log('nextProps',nextProps);
+        if(nextProps.order!==this.props.order){
+          //Perform some operation
+          
+        }
+    }
  
     render() {
         const {item} = this.props;
         return (
-            <Fragment key={item.id}>
+            <Fragment key={item.id+Math.random()*10}>
                 <hr />
                 <div id="cardface-container">
                     <div id="face-container">
-                        <p>{item.face}</p>
+                        <p><b>{item.face}</b></p>
                     </div>
                     <div id="content-container">
                         <p>ID: {item.id}</p>
