@@ -5,5 +5,4 @@ This is an ecommerce site, where you can buy all sorts of ascii faces like `(ノ
 
 ### How do I start the app?
 
-Start with `npm start`. The server will look for any files you add to the `public/` directory.
-
+Start with `npm start`.
